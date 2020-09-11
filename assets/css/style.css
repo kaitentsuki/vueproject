@@ -52,6 +52,8 @@ body, html {
       font-size: 18px; }
     .form__row.has-error .form__input, .form__row.has-error .form__select {
       border-color: #DC143C; }
+    .form__row a {
+      color: #020418ee; }
     .form__row--birthday {
       flex-flow: row wrap;
       justify-content: space-between; }

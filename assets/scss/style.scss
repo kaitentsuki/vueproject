@@ -60,7 +60,7 @@ body , html {
     box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.55);
 
     border-radius: 2px;
-
+    
     &__header {
         margin: -15px -25px 35px -25px;
         background: #020418ee;
@@ -93,6 +93,9 @@ body , html {
             }
         }
 
+        a {
+            color: #020418ee;
+        }
 
         &--birthday {
             flex-flow: row wrap;
