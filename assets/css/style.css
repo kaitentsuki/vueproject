@@ -1,0 +1,143 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap");
+* {
+  box-sizing: border-box; }
+
+body, html {
+  margin: 0;
+  min-height: 100%;
+  height: 100%;
+  background: #fff;
+  font-family: "Roboto", sans-serif; }
+
+.form-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #020418; }
+  .form-wrapper:before {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: url("../images/bg.jpg") no-repeat center;
+    z-index: 1; }
+
+.form {
+  position: relative;
+  max-width: 450px;
+  width: 100%;
+  background: #fff;
+  padding: 15px 25px;
+  z-index: 2;
+  box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.55);
+  border-radius: 2px; }
+  .form__header {
+    margin: -15px -25px 35px -25px;
+    background: #020418ee; }
+    .form__header .header__title {
+      padding: 20px 0;
+      margin: 0;
+      color: #fff;
+      text-align: center; }
+  .form__row {
+    margin-bottom: 10px;
+    display: flex;
+    flex-flow: column; }
+    .form__row label {
+      margin-bottom: 5px;
+      font-size: 18px; }
+    .form__row.has-error .form__input, .form__row.has-error .form__select {
+      border-color: #DC143C; }
+    .form__row--birthday {
+      flex-flow: row wrap;
+      justify-content: space-between; }
+      .form__row--birthday .form__label {
+        flex: 0 0 100%; }
+      .form__row--birthday .row__col {
+        flex: 0 0 32%; }
+        .form__row--birthday .row__col label {
+          display: none; }
+        .form__row--birthday .row__col:nth-child(2) {
+          margin: 0 5px; }
+      .form__row--birthday .errors-container {
+        flex: 0 0 100%; }
+    .form__row--newsletter {
+      margin-top: 15px; }
+    .form__row--terms {
+      margin-top: 15px;
+      display: flex;
+      flex-flow: row wrap; }
+      .form__row--terms label {
+        margin-left: 10px;
+        font-size: 15px; }
+      .form__row--terms .checkbox-wrapper {
+        display: flex;
+        align-items: center; }
+      .form__row--terms .errors-container {
+        flex: 0 0 100%;
+        text-align: right; }
+    .form__row .newsletter-text {
+      font-size: 15px; }
+    .form__row .radio__list {
+      margin-top: 10px;
+      display: flex; }
+      .form__row .radio__list .list__item {
+        margin-right: 15px;
+        display: flex;
+        align-items: center; }
+        .form__row .radio__list .list__item label {
+          font-size: 15px;
+          margin: 0;
+          margin-right: 8px; }
+        .form__row .radio__list .list__item .form__radio {
+          margin: 0; }
+  .form .input-wrapper {
+    width: 100%; }
+  .form__input, .form__select {
+    width: 100%;
+    height: 40px;
+    font-size: 18px;
+    border: none;
+    border-bottom: 2px solid #c4c4c4;
+    transition: .25s border; }
+    .form__input:focus, .form__select:focus {
+      outline: none;
+      border-color: #020418ee; }
+  .form__submit, .form__footer .footer__prev-btn {
+    margin-left: auto;
+    padding: 15px;
+    background: #020418ee;
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    border-radius: 2px;
+    transition: .25s transform; }
+    .form__submit:hover, .form__footer .footer__prev-btn:hover {
+      cursor: pointer;
+      transform: scale(1.05); }
+  .form__footer {
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; }
+    .form__footer .footer__prev-btn {
+      margin-right: auto;
+      margin-left: 0; }
+  .form .errors-container {
+    position: relative;
+    margin-top: 5px;
+    font-size: 15px;
+    text-align: right;
+    color: #DC143C; }
+  .form .form__success-step .success-step__title {
+    text-align: center; }
+
+[v-cloak] {
+  display: none; }

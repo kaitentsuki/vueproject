@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Project</title>
+
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+
+    <div class="form-wrapper">
+        <form action="POST" id="form" action="127.0.0.1" class="form" v-cloak>
+            <div class="form__header">
+                <h1 class="header__title">Formulář</h1>
+            </div>
+            <div class="form__step form__step--one" v-show="step === 1">
+                <div class="form__row" v-bind:class='{"has-error" : errors.firstname}'>
+                    <label for="form_firstname" class="form__label">
+                        Jméno
+                    </label>
+                    <input class="form__input" type="text" name="form_firstname" id="form_firstname" v-model="firstname" required>
+                    <div class="errors-container">
+                        <span class="error-text">
+                            {{ errors.firstname }}
+                        </span>
+                    </div>
+                </div>
+                <div class="form__row" v-bind:class='{"has-error" : errors.lastname}'>
+                    <label for="form_lastname" class="form__label">
+                        Příjmení
+                    </label>
+                    <input class="form__input" type="text" name="form_lastname" id="form_lastname" v-model="lastname" required>
+                    <div class="errors-container">
+                        <span class="error-text">
+                            {{ errors.lastname }}
+                        </span>
+                    </div>
+                </div>
+                <div class="form__row" v-bind:class='{"has-error" : errors.email}'>
+                    <label for="form_email" class="form__label">
+                        Email
+                    </label>
+                    <input class="form__input" type="email" name="form_email" id="form_email" v-model="email" required>
+                    <div class="errors-container">
+                        <span class="error-text">
+                            {{ errors.email }}
+                        </span>
+                    </div>
+                </div>
+                <div class="form__row" v-bind:class='{"has-error" : errors.password}'>
+                    <label for="form_password" class="form__label">
+                        Heslo
+                    </label>
+                    <div class="input-wrapper">
+                        <input class="form__input" type="password" name="form_password" id="form_password" v-model="password" required>
+                    </div>
+                    <div class="errors-container">
+                        <span class="error-text">
+                            {{ errors.password }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="form__step form__step--two" v-show="step === 2">
+                <div class="form__row" v-bind:class='{"has-error" : errors.gender}'>
+                    <label for="form_gender" class="form__label">
+                        Pohlaví
+                    </label>
+                    <select class="form__select" name="form__gender" id="form_gender" v-model="gender">
+                        <option value="" disabled selected>
+                            - Vyberte -
+                        </option>
+                        <option value="male">Muž</option>
+                        <option value="female">Žena</option>
+                        <option value="other">Jiné</option>
+                    </select>
+                    <div class="errors-container" v-if="errors.gender">
+                        <span class="error-text">
+                            {{ errors.gender }}
+                        </span>
+                    </div>
+                </div>
+                <div class="form__row form__row--birthday" v-bind:class='{"has-error" : errors.birth_date}'>
+                    <span class="form__label">
+                        Datum narození
+                    </span>
+                    <div class="row__col">
+                        <label for="birth_day">Den</label>
+                        <select class="form__select" name="form__birth_day" id="birth_day" v-model="birth_day">
+                            <option disabled value="">Den</option>
+                            <option :value="n" v-for="n, index in 31">
+                                {{n}}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="row__col">
+                        <label for="birth_month">Měsíc</label>
+                        <select class="form__select" name="form__birth_month" id="birth_month" v-model="birth_month">
+                            <option disabled value="">Měsíc</option>
+                            <option :value="key+1" v-for="month, key in monthsList">{{month}}</option>
+                        </select>
+                    </div>
+
+                    <div class="row__col">
+                        <label for="">Rok</label>
+                        <select class="form__select" name="form__birth_year" id="birth_year" v-model="birth_year">
+                            <option disabled value="">Rok</option>
+                            <option :value="year" v-for="year in getYears(1900, today+1)">{{year}}</option>
+                        </select>
+                    </div>
+
+                    <div class="errors-container" v-if="errors.birth_date">
+                        <span class="error-text">
+                            {{ errors.birth_date }}
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form__row form__row--newsletter">
+                    <div class="newsletter-text">
+                        Chcete pravidelně dostávát informace a novinky? <br> Uděluji souhlas se <a href="#0">zpracováním
+                            osobních údajů</a> pro marketingové účely.
+                    </div>
+
+                    <div class="radio__list">
+                        <div class="list__item">
+                            <label for="newsletter-choice-1">Ano</label>
+                            <input class="form__radio" type="radio" name="form__newsletter-choice" value="true" id="newsletter-choice-1" v-model="newsletter" checked>
+                        </div>
+                        <div class="list__item">
+                            <label for="newsletter-choice-0">Ne</label>
+                            <input class="form__radio" type="radio" name="form__newsletter-choice" value="false" id="newsletter-choice-0" v-model="newsletter">
+                        </div>
+                    </div>
+
+                    <div class="errors-container" v-if="errors.newsletter">
+                        <span class="error-text">
+                            {{ errors.newsletter }}
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form__row form__row--terms" v-bind:class='{"has-error" : errors.terms_accept}'>
+                    <div class="checkbox-wrapper">
+                        <input class="form__checkbox" type="checkbox" name="form__terms_accept" id="terms_accept" v-model="terms_accept">
+                    <label for="terms_accept">Souhlasím s <a href="#0">obchodními podmínkami</a> a beru na vědomí
+                        poučení o <a href="#0">zpracování mých osobních údajů</a>.</label>
+
+                    </div>
+                        <div class="errors-container" v-if="errors.terms_accept">
+                            <span class="error-text">
+                                {{ errors.terms_accept }}
+                            </span>
+                        </div>
+                </div>
+            </div>
+            <div class="form__footer" v-if="step == 1 || step == 2">
+                <button class="footer__prev-btn" v-show="step === 2" @click="previousStep">Zpět</button>
+                <input class="form__submit" type="submit" :value='step === 1 ? "Pokračovat" : "Odeslat"' @click="validateForm">
+            </div>
+
+            <div class="form__success-step" v-if="step === 3">
+                <h2 class="success-step__title">Děkujeme za registraci.</h2>
+            </div>
+        </form>
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+
+    <script src="https://unpkg.com/vuex@3.5.1/dist/vuex.js"></script>
+
+    <script src="assets/js/form.js"></script>
+
+
+</body>
+
+</html>
